@@ -1,0 +1,52 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>State Design Pattern</title>
+  <metadata>
+  <md:content-id>m17047</md:content-id><md:title>State Design Pattern</md:title>
+  <md:abstract>The State Design Pattern models objects that changes state, i.e. change behavior as a result of what has happened to them.   This is also called "dynamic reclassification".</md:abstract>
+  <md:uuid>45da7d83-4bea-4c79-9baf-8888610f591e</md:uuid>
+</metadata>
+
+<content>
+    <para id="id6390313">Objects are often discussed in terms of having a "state" that describes their exact conditions in a given time, based upon the values of their properties. The particular values of the properties affect the object's behavior. For instance, one can say that the exact behavior of an object's <code>getColor()</code> method is different if the "color" property of the given object is set to "blue" instead of "red" because <code>getColor() </code>returns a different value in the two situations.</para>
+    <para id="id7893135">Furthermore, the object may make decisions at run time as to exactly what to do dependent upon the values its properties possess. For instance, if the sky is blue <code>(sky.setColor(Color.blue))</code>, then the sun should be visible.</para>
+    <para id="id8291824">
+      <code id="id3075733" display="block">
+public boolean sunIsVisible() {
+    if(getColor()==Color.blue) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}</code>
+    </para>
+    <para id="id7093542">One issue with the above solution is that it is a hard-coded logic solution, not an architected solution. The sky does not intrinsically behave a certain way if it is blue, but rather it should figure out what to do in that situation.</para>
+    <para id="id7961263">Wouldn't it be better if the sky intrinsically acted properly if it were blue? One could imagine two objects: a <code>SkyBlue</code> and a <code>SkyNonBlue</code>. The <code>SkyBlue</code> class' <code>sunIsVisible()</code> method would always return true while the <code>SkyNonBlue </code>version would always return false.</para>
+    <para id="id6725492">What one needs now is the ability for a sky object to dynamically (i.e. at run time) change its class to/from <code>SkyBlue</code> and <code>SkyNonBlue</code>. What we'd like to accomplish is called "<emphasis>dynamic reclassification</emphasis>". </para>
+    <para id="id7885517">We've seen code that does change its specific behavior depending on what particular strategy was installed. So, the <code>setColor()</code> method could install a strategy that would always return true if its <code>sunIsVisible() </code>method were to be called.</para>
+    <exercise id="eip-521"><problem id="eip-631">
+		<para id="eip-911">
+    But does the user of the Sky class care about the stratregy?
+  </para>
+	</problem>
+	<solution id="eip-269">
+		<para id="eip-531">
+    Of course not. The user only cares that it does its job.
+  </para>
+	</solution>
+</exercise>
+    <section id="id-643598580808">
+      <title>The State Design Pattern is a fully encapsulated, self-modifying Strategy Design Pattern.</title>
+      
+      <figure id="id7956658"><media id="id2378047" alt=""><image src="../../media/graphics1-47ed.png" mime-type="image/png" height="372" width="888"/></media>
+	
+<caption>UML Class Diagram of the State Design Pattern</caption></figure>
+      <para id="id8223411">One design pattern that is used very often in conjunction with the state pattern is the <link document="m17227">Null Object Pattern</link>. </para>
+      <para id="id7716239">Notice these things about the pattern:</para>
+      <list id="id7908515" list-type="enumerated">
+        <item>Any methods whose behaviors depend on the state of the object are simply delegated on in to the state, and handled there. Thus you will see the same methods in the context as in the states. Since the states are separate objects from the context, all the properties of the context need to have accessor methods that are at least package visible. </item>
+        <item>The "<emphasis>Context</emphasis>" object needs to add a "<emphasis>set</emphasis>" accessor method so the states can modify which state is the active state. This method would be package visible so as to encapsulate the behavior away from the sight of the user.</item>
+      </list>
+    </section>
+  </content>
+</document>

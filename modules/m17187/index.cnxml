@@ -1,0 +1,18 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Command Design Pattern</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>a9c75087-28a9-43a9-9082-15a5d3dc67b5</md:uuid>
+</metadata>
+  <content>
+    <section id="id-532680938967">
+      <title>Command Design Pattern</title>
+      <para id="id12982435">When two objects communicate, often one object is sending a command to the other object to perform a particular function. The most common way to accomplish this is for the first object (the <term>issuer</term>) to hold a reference to the second (the <term>recipient</term>). The issuer executes a specific method on the recipient to send the command.</para>
+      <para id="id11092445">But what if the issuer is not aware of, or does not care who the recipient is? That is, the issuer simply wants to abstractly issue the command?</para>
+      <para id="id11061544">The <term>Command design pattern</term> encapsulates the concept of the command into an object. The issuer holds a reference to the command object rather than to the recipient. The issuer sends the command to the command object by executing a specific method on it. The command object is then responsible for dispatching the command to a specific recipient to get the job done.</para>
+      <para id="id12330947">Note the similarities between the Command design pattern and the <link document="m17037">Strategy design pattern</link>.</para>
+      <figure id="id12814010">
+        <media id="idm15698320" alt=""><image src="../../media/command.png" mime-type="image/png" height="360" width="710"/></media>
+      </figure>
+      <para id="id11718974">In the above diagram, the invoker holds an abstract command and issues a command by calling the abstract <code>execute()</code> method. This command is translated into a specific action on a specific receiver by the various concrete command objects. It is also possible for a command to be a collection of commands, called a <term>macro</term> command. Calling the <code>execute</code> method of a macro command will invoke a collection of commands.</para>
+    </section>
+  </content>
+</document>

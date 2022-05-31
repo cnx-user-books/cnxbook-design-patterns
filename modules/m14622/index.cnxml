@@ -1,0 +1,78 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Union Design Pattern</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>211f5b62-2865-4da4-8e7c-696fbe7a2ac5</md:uuid>
+</metadata>
+  <content>
+    <section id="id-536051364619">
+      <title>UML Diagram and Characteristics</title>
+      <para id="id3765567">In general, the UML class diagram for the union design pattern looks like such:</para>
+      <figure id="id9449120"><title>Union Design Pattern</title>
+	<media id="idp13502864" alt=""><image src="../../media/graphics1-d6ac.png" mime-type="image/png" height="199" width="510"/></media>
+<caption>UML diagram of the union design pattern</caption></figure>
+      <para id="id3469356">The characteristics of the union pattern are</para>
+      <list list-type="bulleted" id="id3804982">
+        <item>1 abstract superclass that represents the abstraction of all the subclasses.   (Note that the superclass could be an interface.)   The superclass can never instantiated because it does not represent any particular concrete entity. The methods of the superclass could be abstract (variant behaviors defined in the subclasses) or concrete (pure invariant behavior)--See below . </item>
+        <item>2 or more subclasses (It is arguable whether or not a single subclass would qualify--if one considers that it might be possible that other subclasses could exist and are simply not coded yet, then one could argue that there is actually more than one subclass.)   A subclass could be abstract, in which case, it would represent another abstraction layer. </item>
+      </list>
+      <para id="id3850583"><emphasis>Corollary</emphasis>:   Another way of thinking about the union pattern is to consider that the abstract superclass represents <emphasis>any</emphasis> of the subclasses.   That is, anywhere the superclass is referenced, an instance of any of subclasses could be used.     This is the essence of <link url="http://www.exciton.cs.rice.edu/JavaResources/Oop/polymorph.htm"><term>polymorphism</term></link>.</para>
+    </section>
+    <section id="id-414409163749">
+      <title>Examples</title>
+      <para id="id3846371">Consider the following examples:</para>
+      <list list-type="enumerated" id="id3846376"><item>Oranges, apples, pears, peaches, and mangos can all be abstractly represented as "fruit".   Note that there is no such thing as a fruit that is not of some concrete sort, e.g. plum or strawberry.    The concept of "fruit" is an abstraction that represents the union of oranges, apples, plums, etc.   The notion of a fruit contains only the essence of what is common to all the concrete instances, such as containing seeds, having a sweet juicy flesh, etc.    On the other hand, the notion of a fruit does not include specific information that pertains to only oranges--the number of orange sections it has, for instance--or to only strawberries -- the nature of its vine, for instance-- or to only any other particular kind of fruit.   To talk about a fruit is to talk about all fruit at once -- the union of all types of fruit.<figure id="fruitfig1"><title>Union of different fruits</title><media id="idp9838640" alt=""><image src="../../media/graphics2-9081.png" mime-type="image/png"/></media>
+<caption><code>Fruit</code> represents the union or abstraction of many types of specific things</caption></figure>In the above UML class diagram,  we see that oranges, apples, mangos and other concrete fruit classes all inherit from an abstract fruit class.</item>
+	<item>Keyboards, mice, microphones, network ports and speakers are all input/output ("I/O") devices.  An I/O device cannot exist without being a specific, concrete type of device, such as a keyboard or a speaker.     Thus the concept of an  "I/O device" is an abstraction of the union of all keyboards, printer ports, microphones, etc.   The notion of an I/O device contains high-level issues about moving data into and out of a computer, but not any low-level concrete information about how it is done such as via a parallel or serial bit stream or how the data is formatted.    "I/O device" refers to all possible types of input/output device. <figure id="iofig1"><title>Union of different I/O devices</title><media id="idm907952" alt=""><image src="../../media/graphics3-f25c.png" mime-type="image/png"/></media>
+<caption><code>IODevice</code> represents the union of many different types of specific devices</caption></figure>As before, the UML class diagram shows us that the keyboard, mouse, network port and other concrete I/O devices inherit from an abstract I/O device class.</item>
+</list>
+      <para id="id2909186"> </para>
+    </section>
+    <section id="id-572620451932">
+      <title>Relationship to Abstraction and Variant/Invariant Principles </title>
+      <section id="id-918978222806">
+        <title>Abstraction Layers</title>
+        <para id="id11071000">One of the most important things that the union pattern does for an OO design is to define layers of abstraction.    The abstract superclass represents a higher level of abstraction than the concrete subclasses.   The union pattern thus defines two distinct abstraction levels.   At any given moment, a program will that uses the classes involved in the union pattern will be running at either the lower, more concrete abstraction level or the higher, more abstract level.   </para>
+        <para id="id3806978">Good OO design pays careful attention to maintaining a consistent abstraction level in any given section of code.   Changing abstraction levels in the middle of a process, particularly the decreasing of abstraction, effectively nullifies the power and flexibility of having made the abstraction in the first place.</para>
+        <para id="id3870156"><quote display="block" id="idp9251136">
+		<emphasis>WARNING!</emphasis>
+	</quote>
+<quote display="block" id="idp6141152">Simply having an abstract superclass does not automatically imply the existence of the union pattern!   </quote></para>
+        
+        <para id="id3864314">Sometimes abstract superclasses are used to encapsulate and/or centralize shared or common code used in the subclasses.   This gathering of code from the subclasses and relocating it to a superclass, often refered to as "<term>hoisting</term>", does not guarantee that the superclass is an abstraction of the subclasses.   For instance, it would be convenient to put a field in "fruit" that tells us how many sections it has, because so many fruit, such as oranges, grapefruit, etc, form in sections.    But the very fact that some fruit, such as mangos are not describable in terms of sections, means that to include such a field in "fruit" would compromise it as an abstraction of all fruit.     When performing hoisting, one must be very careful to understand the difference between "universalizing" (trying to do everything) and "abstracting" (capturing the essence of the problem).</para>
+      </section>
+      <section id="id-557651563885">
+        <title>Variant vs. Invariant</title>
+        <para id="id8420123">One of the most fundamental OO design decisions is where exactly to put the dividing line between the <term>invariant</term>, unchanging aspects of the problem and the <term>variant</term>, changing aspects.   The union design pattern provides a clear representation of one type of variant-invariant separation.</para>
+        <para id="id8355101">The abstract superclass is a representation of the essence that common to all possible concrete subclasses.   It thus represents the invariant aspects of all elements in the union.</para>
+        <para id="id10080930">The concrete subclasses, while all equivalent at a higher, more abstract level, are different from each other in some manner.   They thus represent the variant aspects of the problem.  </para>
+        <para id="id7323600">Code that works at the abstraction level of the superclass is thus invariant code.   It is capable of working with any instance of the concrete subclasses because it only deals with the invariant behavior of the superclass.  The actual total behavior of the system is the invariant behavior of the abstract superclass plus the variant behaviors provided polymorphically by the instance of the concrete subclass being used.</para>
+      </section>
+    </section>
+  </content>
+	<glossary id="glossary1">
+	  <definition id="polymorphismdef">
+	    <term>polymorphism</term>
+	    <meaning id="idp8431440">
+              The ability for a subclass instance to be used wherever its superclass (or implemented interface) is required.  This is because all subclasses are abstractly equivalent to their superclasses.  However, the use of different subclass instances in the same situation will produce differing resultant program behaviors because each subclass will behave in their own, differing concrete manners, even though those concrete behaviors are all abstractly equivalent.   For more information, see the <link url="http://en.wikipedia.org/wiki/Polymorphism_in_object-oriented_programming">Wikipedia article on polymorphism</link> and this <link url="http://www.exciton.cs.rice.edu/JavaResources/Oop/polymorph.htm">web page on polymorphism and abstraction</link>.
+            </meaning>
+	  </definition>
+<definition id="hoistingdef">
+<term>hoisting</term>
+<meaning id="idp5847952">
+The act of removing equivalent methods or fields common to all subclasses and moving them to their superclass.  While this saves one from repeating code over and over again in the subclasses, the act of hoisting does not guarantee that the hoisted fields or methods are indeed true invariants of the subclasses.  That is hoisting does not guarantee that the hoisted items are part of the abstraction of the subclasses. This is because hoisting assumes that all possible subclasses are known at the time the hoisting takes place, which is not always true.   
+</meaning>
+</definition>
+<definition id="invariantdef">
+<term>invariant</term>
+<meaning id="idp8970432">
+Refers to anything that is the same across a set of classes.  This includes attributes, concrete behaviors (methods) and abstract behaviors.   The invariant properties constitute the abstraction of a set of classes.
+</meaning>
+</definition>
+<definition id="variantdef">
+<term>variant</term>
+<meaning id="idm1623504">
+Refers to anything that is <emphasis>not</emphasis> the same across a set of classes.  This includes attributes and concrete behaviors (methods).   The variant properties create the unique definition of a class.
+</meaning>
+</definition>
+	</glossary>
+
+</document>

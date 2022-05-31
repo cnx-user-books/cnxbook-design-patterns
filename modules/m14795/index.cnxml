@@ -1,0 +1,31 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Composite Design Pattern</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>2ee843da-20ec-44d1-919b-f891efc8ec73</md:uuid>
+</metadata>
+  <content>
+    <section id="id-0812683676375">
+      <title>Description</title>
+      <para id="id8994164">The <term>Composite Design Pattern</term> allows a client object to treat both single components and collections of components identically.    It accomplishes this by creating an abstraction that unifies both the single components and composed collections as abstract equivalents. Mathematically, we say that the single components and composed collections are <term>homomorphically</term> equivalent (from the Latin: <foreign>homo</foreign> – same and <foreign>morph</foreign> – form ==&gt; to have the same form).</para>
+      <para id="id10749687">This equivalence of single and composite components is what we call a <term>recursive data structure</term>. In recursive data structures, objects are linked to other objects to create a total object structure made of many “nodes” (objects). Since every node is abstractly equivalent, the entire, possibly infinitely large and complex data structure can be succinctly described in terms of just three distinct things: the single components, the composite components and their abstract representation. This massive reduction in complexity is one of the cornerstones of computer science.</para>
+      <para id="id7042780">
+        <quote display="block" id="idm9552608">The Composite Design Pattern is an object-oriented representation of a recursive data structure. </quote>
+      </para>
+    </section>
+    <section id="id-966952403759">
+      <title>UML Diagram and Example</title>
+      <para id="id12066977">In the UML class diagram below, the <code>Client</code> uses an abstract component, <code>AComponent</code>, for some abstract task, <code>operation()</code>.   At run-time, the <code>Client</code> may hold a reference to a concrete component such as <code>Leaf1</code> or <code>Leaf2</code>.   When the operation task is requested by the <code>Client</code>, the specific concrete behavior with the particular concrete component referenced will be performed.     </para>
+
+      <para id="id12815927"><figure id="fig1"><title>UML Diagram of Composite Design Pattern Example</title>
+	<media id="idm1150816" alt=""><image src="../../media/graphics1-1cd5.png" mime-type="image/png" height="383" width="662"/></media>
+<caption>An example of a composite design pattern implementation with 2 single, concrete components and one composite, collection component.</caption>
+</figure>
+</para>
+
+      <para id="id11963619">The <code>Composite</code> class is a concrete component like <code>Leaf1</code> and <code>Leaf2</code>, but has no <code>operation()</code> behavior of its own.    Instead, <code>Composite</code> is composed with a collection of other abstract components, which may be of any other concrete component type including the composite itself.   The unifying fact is that they are all abstractly <code>AComponent</code>s.   When the <code>operation()</code> method of a <code>Composite</code> object is called, it simply dispatches the request sequentially to all of its "children" components and perhaps, also does some additional computations itself.     For instance, a <code>Composite</code> object could hold references to both a <code>Leaf1</code> and a <code>Leaf2</code> instance.   If a client holds a reference to that <code>Composite</code> object and calls its <code>operation()</code> method, the <code>Composite</code> object will first call operation on its <code>Leaf1</code> instance and then <code>operation()</code> on its <code>Leaf2</code> instance.   Thus composite behavior of <code>Leaf1</code> plus <code>Leaf2</code> behaviors is achieved without either duplicating code or by having the <code>Client</code> object knowing that the two leaf components were involved.  </para>
+      <para id="id6461674">Composite patterns are often used to represent recursive data structures.    The recursive nature of the Composite structure naturally gives way to recursive code to process that structure.</para>
+      
+<note type="Implementation issues" id="idm112736"><label>Implementation issues</label>The collection of <code>AComponent</code>s held by <code>Composite</code>, "children", is shown above as an array.   However, the behavior of a Composite pattern is independent of exactly how the collection of <code>AComponents</code> is implemented.   If access speed is not an issue, a vector or a list may be a better implementation choice.    The <code>addChild()</code> and <code>removeChild()</code> methods are optional.</note>
+      <para id="id12850798">In <cite><cite-title>Design Patterns</cite-title></cite>, the abstract component <code>AComponent</code> is shown as having accessor methods for child <code>AComponent</code>s.   They are not shown here because it is debatable as to whether one wants the <code>Client</code> to fundamentally view the <code>AComponent</code> as a single component or as a collection of components.   <cite><cite-title>Design Patterns</cite-title></cite> models all <code>AComponent</code>s as collections while the above design models them all as single components.   The exact nature of those accessor methods is also debatable.</para>
+    </section>
+  </content>
+</document>

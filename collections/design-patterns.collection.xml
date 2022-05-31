@@ -1,0 +1,37 @@
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:md="http://cnx.rice.edu/mdml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+    <md:content-id>col10678</md:content-id>
+    <md:title>Design Patterns</md:title>
+    <md:language>en</md:language>
+    <md:license url="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License</md:license>
+    <md:uuid>f5dbc555-eb89-443e-a465-2708ec8f7a30</md:uuid>
+<md:slug>design-patterns</md:slug>
+</metadata>
+  <col:content>
+    <col:subcollection>
+      <md:title>uml</md:title>
+      <col:content/>
+    </col:subcollection>
+    <col:module document="m17187"/>
+    <col:module document="m16796"/>
+    <col:module document="m17203"/>
+    <col:module document="m14795"/>
+    <col:module document="m15111"/>
+    <col:module document="m15110"/>
+    <col:module document="m17227"/>
+    <col:module document="m17047"/>
+    <col:module document="m17225"/>
+    <col:module document="m14622"/>
+    <col:module document="m16707"/>
+    <col:subcollection>
+      <md:title>in Actions</md:title>
+      <col:content>
+        <col:module document="m17309"/>
+      </col:content>
+    </col:subcollection>
+    <col:subcollection>
+      <md:title>(Untitled)</md:title>
+      <col:content/>
+    </col:subcollection>
+  </col:content>
+</col:collection>
